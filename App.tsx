@@ -28,7 +28,9 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import { wallet } from '@liquality/wallet-core'
+import wallet from '@liquality/wallet-core'
+
+console.log(wallet)
 
 const Section: React.FC<{
   title: string;
