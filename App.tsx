@@ -28,9 +28,9 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import wallet from '@liquality/wallet-core'
+import { wallet } from '@liquality/wallet-core'
 
-console.log(wallet)
+console.log(wallet.state)
 
 const Section: React.FC<{
   title: string;
@@ -67,10 +67,10 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const [count, setCount] = useState(wallet.state.count);
+  const [count, setCount] = useState(wallet.state.version);
 
   wallet.subscribe((mutation, state) => {
-    setCount(state.count);
+    setCount(state.version);
   })
 
   return (
