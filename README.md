@@ -1,5 +1,9 @@
 How to run successfully because this is completely normal:
 
+
+Just run `yarn` `cd ios && pod install` `yarn ios`
+
+
 - `yarn`
 - `./node_modules/.bin/rn-nodeify --hack --install`
 - `cd ios && pod install`
