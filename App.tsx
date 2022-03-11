@@ -21,6 +21,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import { wallet } from '@liquality/wallet-core'
+import { assets, unitToCurrency } from '@liquality/cryptoassets'
+import BigNumber from 'bignumber.js'
 
 const SEED = 'obvious digital bronze kangaroo crew basic drink liquid secret unveil dose conduct'
 
@@ -35,25 +37,39 @@ const App = () => {
 
   wallet.subscribe((mutation, newState) => {
     setState(newState);
+    console.log('state updated')
   })
 
-  const createWallet = () => {
-    wallet.dispatch('createWallet', {
+  const createWallet = async () => {
+    await wallet.dispatch('createWallet', {
       key: 'test123',
       mnemonic: SEED,
       imported: true
     })
+
+    await wallet.dispatch('changeActiveNetwork', { walletId: wallet.state.activeWalletId, network: 'testnet' })
+
+    await wallet.dispatch('updateBalances', { network: wallet.state.activeNetwork, walletId: wallet.state.activeWalletId, assets: ['ETH', 'MATIC'] })
   }
+
+  const polygonAccount = state.accounts[state.activeWalletId]?.[state.activeNetwork]?.find(account => account.chain === 'polygon')
+
+  let balance
+  if (polygonAccount) {
+    balance = unitToCurrency(assets.MATIC, new BigNumber(polygonAccount.balances.MATIC)).toString()
+  }
+
+  console.log('polygon account', polygonAccount)
 
   return (
     <SafeAreaView style={backgroundStyle}>
       <Button onPress={createWallet} title="Create Wallet"></Button>
-      <Text  style={[
+      { polygonAccount && <Text selectable style={[
           {
             textAlign: 'center',
             fontSize: 40
           },
-        ]}>{ state.wallets.length }</Text>
+        ]}>MATIC Balance: { balance }, MATIC Address: 0x{ polygonAccount.addresses[0] }</Text> }
     </SafeAreaView>
   );
 };
