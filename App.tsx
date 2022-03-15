@@ -20,9 +20,9 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-import { wallet } from '@liquality/wallet-core'
 import { assets, unitToCurrency } from '@liquality/cryptoassets'
 import BigNumber from 'bignumber.js'
+import { wallet } from '@liquality/wallet-core';
 
 const SEED = 'obvious digital bronze kangaroo crew basic drink liquid secret unveil dose conduct'
 
@@ -35,24 +35,25 @@ const App = () => {
 
   const [state, setState] = useState(wallet.state);
 
-  wallet.subscribe((mutation, newState) => {
+  wallet.original.subscribe((mutation, newState) => {
     setState(newState);
-    console.log('state updated')
+
   })
 
   const createWallet = async () => {
-    await wallet.dispatch('createWallet', {
+    await wallet.dispatch.createWallet ({
       key: 'test123',
       mnemonic: SEED,
       imported: true
     })
 
-    await wallet.dispatch('changeActiveNetwork', { walletId: wallet.state.activeWalletId, network: 'testnet' })
+    await wallet.dispatch.changeActiveNetwork({ network: 'testnet' })
 
-    await wallet.dispatch('updateBalances', { network: wallet.state.activeNetwork, walletId: wallet.state.activeWalletId, assets: ['ETH', 'MATIC'] })
+    await wallet.dispatch.updateBalances({ network: wallet.state.activeNetwork, walletId: wallet.state.activeWalletId, assets: ['ETH', 'MATIC'] })
   }
 
-  const polygonAccount = state.accounts[state.activeWalletId]?.[state.activeNetwork]?.find(account => account.chain === 'polygon')
+  // @ts-ignore
+  const polygonAccount = state.accounts[state.activeWalletId]?.[state.activeNetwork]?.find(account => account.chain === 'polygon') 
 
   let balance
   if (polygonAccount) {

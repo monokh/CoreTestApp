@@ -2399,10 +2399,10 @@
     "@liquality/types" "^1.13.9"
     setimmediate "^1.0.5"
 
-"@liquality/wallet-core@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@liquality/wallet-core/-/wallet-core-1.0.8.tgz#845a14ad89639c5ee206a846e4449b3b4e2ba308"
-  integrity sha512-gf3EdGZ+mBFVZzWlyXNtpAUDnZZjW0br+UpA4q6l0Whlfozam/JLPAtZGEbwjFHv11ng8x5LoJfwqelIC7qJTQ==
+"@liquality/wallet-core@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@liquality/wallet-core/-/wallet-core-1.1.1.tgz#6e7d9ec6ff48651785c4d7ebe6b50f9c7e8e55b2"
+  integrity sha512-//oZlpDUX8fyTW/jDzZIBXyUFlWEpcvoAp/OlV6Qu7EZKzqvX9MBv41NMOc5j04f2pyWetFA3DtVE3fofWJSuw==
   dependencies:
     "@blobfishkate/sovryncontracts" "^1.3.27"
     "@liquality/bitcoin-esplora-batch-api-provider" "1.13.7"
@@ -2454,6 +2454,7 @@
     amplitude-js "^8.17.0"
     bignumber.js "^9.0.2"
     detect-circular-deps "^3.0.0"
+    direct-vuex "^1.0.0-rc3"
     human-standard-token-abi "^2.0.0"
     jsbi "^4.1.0"
     moment "^2.29.1"
@@ -5366,6 +5367,11 @@ dir-glob@^3.0.1:
   integrity sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==
   dependencies:
     path-type "^4.0.0"
+
+direct-vuex@^1.0.0-rc3:
+  version "1.0.0-rc3"
+  resolved "https://registry.yarnpkg.com/direct-vuex/-/direct-vuex-1.0.0-rc3.tgz#6e90e997f353cf60fbbffa9cc0df295a0b122663"
+  integrity sha512-oxpz9kPmxHxAgFC5jKqjziqCbAuGXxwQZbObYGx7D+a3666D6juxERMe40wa0BddzjXk6ZnbkCdD3UCWGTtZJQ==
 
 dns.js@^1.0.1:
   version "1.0.1"
