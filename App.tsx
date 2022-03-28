@@ -22,7 +22,10 @@ import {
 
 import { assets, unitToCurrency } from '@liquality/cryptoassets'
 import BigNumber from 'bignumber.js'
-import { wallet } from '@liquality/wallet-core';
+import { setupWallet } from '@liquality/wallet-core';
+import defaultOptions from '@liquality/wallet-core/dist/walletOptions/defaultOptions'
+
+const wallet = setupWallet(defaultOptions)
 
 const SEED = 'obvious digital bronze kangaroo crew basic drink liquid secret unveil dose conduct'
 
@@ -37,7 +40,6 @@ const App = () => {
 
   wallet.original.subscribe((mutation, newState) => {
     setState(newState);
-
   })
 
   const createWallet = async () => {
@@ -50,11 +52,15 @@ const App = () => {
     await wallet.dispatch.changeActiveNetwork({ network: 'testnet' })
 
     await wallet.dispatch.updateBalances({ network: wallet.state.activeNetwork, walletId: wallet.state.activeWalletId, assets: ['ETH', 'MATIC'] })
+
+    await wallet.dispatch.updateFees({ asset: 'BTC' })
   }
 
   // @ts-ignore
   const polygonAccount = state.accounts[state.activeWalletId]?.[state.activeNetwork]?.find(account => account.chain === 'polygon') 
 
+  console.log(state.fees)
+  console.log('test')
   let balance
   if (polygonAccount) {
     balance = unitToCurrency(assets.MATIC, new BigNumber(polygonAccount.balances.MATIC)).toString()
